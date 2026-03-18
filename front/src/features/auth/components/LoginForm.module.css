@@ -1,0 +1,69 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 245, 160, 0.15);
+  border-radius: 16px;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #00F5A0, #00D9F5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #0A0E1A;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #E0E0E0;
+  margin: 0;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+.googleBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #E0E0E0;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.googleBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 245, 160, 0.4);
+}
+
+.googleIcon {
+  flex-shrink: 0;
+}
+
+.error {
+  color: #FF6B6B;
+  font-size: 13px;
+  text-align: center;
+}

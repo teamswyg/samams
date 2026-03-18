@@ -1,0 +1,55 @@
+.toolbar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(17, 24, 39, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 245, 160, 0.2);
+  border-radius: 16px;
+}
+
+.btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  background: rgba(0, 245, 160, 0.1);
+  color: var(--color-primary);
+}
+
+.zoomLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  width: 48px;
+  text-align: center;
+}
+
+.sep {
+  width: 1px;
+  height: 20px;
+  background: rgba(0, 245, 160, 0.2);
+}
+
+.hint {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

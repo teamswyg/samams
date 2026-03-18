@@ -1,0 +1,375 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 26, 0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fade-in 0.2s ease;
+}
+
+.modal {
+  width: 100%;
+  max-width: 680px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.warnIcon {
+  font-size: 20px;
+}
+
+.headerTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.badge {
+  padding: 3px 10px;
+  background: rgba(0, 204, 136, 0.12);
+  color: var(--color-primary);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+/* ── Start Form ──────────────────────────── */
+
+.startForm {
+  padding: 24px;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.input {
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  outline: none;
+  width: 100%;
+}
+.input:focus {
+  border-color: var(--color-primary);
+}
+select.input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+select.input option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.description {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.startBtn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, var(--color-primary), #00D98F);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--color-bg);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.startBtn:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 0 20px var(--color-primary-dim);
+}
+.startBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius);
+  color: var(--color-error);
+  font-size: 13px;
+}
+
+.badgeComplete {
+  padding: 3px 10px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Decision Result ────────────────────── */
+
+.decisionResult {
+  padding: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.decisionHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.decisionLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.decisionBadge {
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.decision_restructure {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+}
+
+.decisionReasoning {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0;
+  padding: 12px 16px;
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+.decisionMeta {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ── Stage Progress Bar ──────────────────── */
+
+.stageBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  gap: 4px;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.stageDone {
+  opacity: 1;
+}
+
+.stageCurrent {
+  opacity: 1;
+}
+
+.stageDot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: all 0.3s;
+}
+
+.stageDone .stageDot {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.stageCurrent .stageDot {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.stageLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ── Status Info ─────────────────────────── */
+
+.conflictInfo {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.conflictRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.timer {
+  color: var(--color-text-muted);
+}
+
+.countdown {
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* ── Participants ────────────────────────── */
+
+.participantList {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.participantHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.progressText {
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+}
+
+.participantRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.participantUid {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--color-text);
+}
+
+.participantStatus {
+  font-size: 14px;
+}
+
+/* ── Progress Bar ────────────────────────── */
+
+.progressBar {
+  height: 4px;
+  background: var(--color-bg);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #00D98F);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ── Actions ─────────────────────────────── */
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+}
+
+.dismissBtn {
+  padding: 8px 20px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+.dismissBtn:hover {
+  border-color: var(--color-text-muted);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 204, 136, 0); }
+  50% { box-shadow: 0 0 12px 2px rgba(0, 204, 136, 0.3); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

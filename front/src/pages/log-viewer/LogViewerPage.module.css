@@ -1,0 +1,12 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}

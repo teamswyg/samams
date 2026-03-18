@@ -1,0 +1,41 @@
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.canvas {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  background: var(--color-bg);
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.transformLayer {
+  position: absolute;
+  will-change: transform;
+}
+
+.nodeCount {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  z-index: 20;
+  padding: 6px 12px;
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 245, 160, 0.15);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+}

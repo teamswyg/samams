@@ -1,0 +1,187 @@
+[
+  {
+    "event": "user.signed_up",
+    "const": "TypeUserSignedUp",
+    "handler": { "package": "user", "usecase": "GoogleLogin", "command_type": "GoogleLoginCommand", "description": "User signed up", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "user.logged_in",
+    "const": "TypeUserLoggedIn",
+    "handler": { "package": "user", "usecase": "GoogleLogin", "command_type": "GoogleLoginCommand", "description": "User logged in", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "project.created",
+    "const": "TypeProjectCreated",
+    "handler": { "package": "project", "usecase": "Create", "command_type": "Command", "description": "Project created", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "task.created",
+    "const": "TypeTaskCreated",
+    "policies": [ "agent.created", "task.context_planned" ],
+    "handler": { "package": "task", "usecase": "Create", "command_type": "Command", "context_planner": true, "description": "Create task Lambda", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.status_updated",
+    "const": "TypeTaskStatusUpdated",
+    "handler": { "package": "task", "usecase": "UpdateStatus", "command_type": "StatusCommand", "context_planner": true, "description": "Update task status Lambda", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.summary_updated",
+    "const": "TypeTaskSummaryUpdated",
+    "handler": { "package": "task", "usecase": "UpdateSummary", "command_type": "SummaryCommand", "context_planner": true, "description": "Update task summary", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.retry_incremented",
+    "const": "TypeTaskRetryIncremented",
+    "handler": { "package": "task", "usecase": "IncrementRetry", "command_type": "RetryCommand", "context_planner": true, "description": "Task retry incremented", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.context_planned",
+    "const": "TypeTaskContextPlanned",
+    "handler": { "package": "task", "usecase": "ContextPlanned", "command_type": "Command", "context_planner": true, "description": "Task context planned", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.cancelled",
+    "const": "TypeTaskCancelled",
+    "handler": { "package": "task", "usecase": "Cancel", "command_type": "StatusCommand", "context_planner": true, "description": "Task cancelled", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.hard_stopped",
+    "const": "TypeTaskHardStopped",
+    "handler": { "package": "task", "usecase": "HardStop", "command_type": "StatusCommand", "context_planner": true, "description": "Task hard stopped", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "task.redistributed",
+    "const": "TypeTaskRedistributed",
+    "handler": { "package": "task", "usecase": "Redistribute", "command_type": "StatusCommand", "context_planner": true, "description": "Task redistributed", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "strategy.meeting_requested",
+    "const": "TypeStrategyMeetingRequested",
+    "handler": { "package": "strategy", "usecase": "MeetingRequested", "command_type": "Command", "description": "Strategy meeting requested", "memory_size": 512, "timeout": 60 }
+  },
+  {
+    "event": "strategy.meeting_started",
+    "const": "TypeStrategyMeetingStarted",
+    "handler": { "package": "strategy", "usecase": "MeetingStarted", "command_type": "Command", "description": "Strategy meeting started", "memory_size": 512, "timeout": 60 }
+  },
+  {
+    "event": "strategy.meeting_resolved",
+    "const": "TypeStrategyMeetingResolved",
+    "policies": [ "strategy.decision_applied", "task.redistributed", "task.cancelled" ],
+    "handler": { "package": "strategy", "usecase": "MeetingResolved", "command_type": "Command", "description": "Strategy meeting resolved", "memory_size": 512, "timeout": 60 }
+  },
+  {
+    "event": "strategy.decision_applied",
+    "const": "TypeStrategyDecisionApplied",
+    "handler": { "package": "strategy", "usecase": "DecisionApplied", "command_type": "Command", "description": "Strategy decision applied", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "control.context_reset",
+    "const": "TypeControlContextReset",
+    "handler": { "package": "control", "usecase": "ContextReset", "command_type": "Command", "description": "Control context reset", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "control.context_loaded",
+    "const": "TypeControlContextLoaded",
+    "handler": { "package": "control", "usecase": "ContextLoaded", "command_type": "Command", "description": "Control context loaded", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "control.context_lost_detected",
+    "const": "TypeContextLostDetected",
+    "handler": { "package": "control", "usecase": "ContextLostDetected", "command_type": "Command", "description": "Context lost detected", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "usage.reported",
+    "const": "TypeUsageReported",
+    "handler": { "package": "usage", "usecase": "Report", "command_type": "ReportCommand", "description": "Usage reported", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "usage.limit_approaching",
+    "const": "TypeUsageLimitApproaching",
+    "handler": { "package": "usage", "usecase": "LimitApproaching", "command_type": "Command", "description": "Usage limit approaching", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "usage.limit_exceeded",
+    "const": "TypeUsageLimitExceeded",
+    "handler": { "package": "usage", "usecase": "LimitExceeded", "command_type": "Command", "description": "Usage limit exceeded", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "agent.created",
+    "const": "TypeAgentCreated",
+    "policies": [ "agent.assigned" ],
+    "handler": { "package": "agent", "usecase": "Created", "command_type": "Command", "description": "Agent created", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "agent.assigned",
+    "const": "TypeAgentAssigned",
+    "handler": { "package": "agent", "usecase": "Assigned", "command_type": "Command", "description": "Agent assigned", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "agent.state_changed",
+    "const": "TypeAgentStateChanged",
+    "handler": { "package": "agent", "usecase": "StateChanged", "command_type": "Command", "description": "Agent state changed", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "agent.paused",
+    "const": "TypeAgentPaused",
+    "handler": { "package": "agent", "usecase": "Paused", "command_type": "Command", "description": "Agent paused", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "agent.resumed",
+    "const": "TypeAgentResumed",
+    "handler": { "package": "agent", "usecase": "Resumed", "command_type": "Command", "description": "Agent resumed", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "agent.stopped",
+    "const": "TypeAgentStopped",
+    "handler": { "package": "agent", "usecase": "Stopped", "command_type": "Command", "description": "Agent stopped", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "agent.error",
+    "const": "TypeAgentError",
+    "handler": { "package": "agent", "usecase": "Error", "command_type": "Command", "description": "Agent error", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "notification.created",
+    "const": "TypeNotificationCreated",
+    "handler": { "package": "notification", "usecase": "Created", "command_type": "Command", "description": "Notification created", "memory_size": 512, "timeout": 30 }
+  },
+  {
+    "event": "maal.record_created",
+    "const": "TypeMaalRecordCreated",
+    "handler": { "package": "maal", "usecase": "RecordCreated", "command_type": "Command", "description": "MAAL record created", "memory_size": 512, "timeout": 30 }
+  },
+
+  {
+    "event": "proxy.heartbeat",
+    "const": "TypeProxyHeartbeat",
+    "handler": { "package": "proxy", "usecase": "Heartbeat", "command_type": "HeartbeatCommand", "description": "Proxy heartbeat — saves state to S3", "memory_size": 256, "timeout": 15 }
+  },
+  {
+    "event": "proxy.commands_poll",
+    "const": "TypeProxyCommandsPoll",
+    "handler": { "package": "proxy", "usecase": "CommandsPoll", "command_type": "PollCommand", "description": "Proxy commands poll — returns pending commands from S3", "memory_size": 256, "timeout": 15 }
+  },
+  {
+    "event": "proxy.events_push",
+    "const": "TypeProxyEventsPush",
+    "handler": { "package": "proxy", "usecase": "EventsPush", "command_type": "EventsPushCommand", "description": "Proxy events push — forwards events to SQS pipeline", "memory_size": 256, "timeout": 15 }
+  },
+  {
+    "event": "proxy.command_response",
+    "const": "TypeProxyCommandResponse",
+    "handler": { "package": "proxy", "usecase": "CommandResponse", "command_type": "CommandResponseCmd", "description": "Proxy command response — moves command pending to completed in S3", "memory_size": 256, "timeout": 15 }
+  },
+  {
+    "event": "proxy.task_completed",
+    "const": "TypeProxyTaskCompleted",
+    "handler": { "package": "proxy", "usecase": "TaskCompleted", "command_type": "TaskCompletedCommand", "description": "Proxy task completed — Summarizer + Cascade via Gemini", "memory_size": 512, "timeout": 60 }
+  }
+]

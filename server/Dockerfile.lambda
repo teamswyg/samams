@@ -1,0 +1,9 @@
+FROM public.ecr.aws/lambda/provided:al2023
+
+# bootstrap 바이너리는 build_and_push_lambda.sh에서 GOOS=linux GOARCH=amd64 로 빌드됨
+COPY bootstrap /var/runtime/bootstrap
+
+RUN chmod +x /var/runtime/bootstrap
+
+CMD ["/var/runtime/bootstrap"]
+

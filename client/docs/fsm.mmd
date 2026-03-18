@@ -1,0 +1,114 @@
+# Agent Proxy / MAAM FSM (Mermaid)
+
+## 1. Task FSM
+
+**현재 구현:** `POST /tasks` 시 에이전트를 바로 시작하므로 초기 상태는 `running`이다.  
+`pending` / `planning` 은 확장 시(계획만 먼저 세우는 플로우) 사용.
+
+```mermaid
+stateDiagram-v2
+    [*] --> running: POST /tasks (에이전트 즉시 시작)
+    [*] --> pending: (확장) 태스크만 생성
+    [*] --> planning: (확장) 계획 수립 단계
+
+    pending --> planning: context 계획
+    pending --> running: 에이전트 배정
+    planning --> running: 실행 시작
+
+    running --> scaling: POST .../scale
+    scaling --> running: 스케일 완료
+
+    running --> resetting: POST .../reset
+    resetting --> running: 재시작 완료
+
+    running --> paused: POST .../pause\n또는 stop(graceful=true)
+    paused --> running: POST .../resume
+
+    running --> stopped: POST .../stop\n(graceful=false)
+    running --> cancelled: POST .../cancel\n또는 strategy apply
+    paused --> cancelled: strategy apply
+
+    running --> error: 에이전트 전부 실패 등
+    running --> done: 작업 완료
+
+    stopped --> [*]
+    cancelled --> [*]
+    done --> [*]
+    error --> [*]
+```
+
+## 2. Agent FSM
+
+```mermaid
+stateDiagram-v2
+    [*] --> starting: StartAgent()
+
+    starting --> running: 프로세스 기동 완료
+    starting --> error: 기동 실패
+
+    running --> paused: 관제 pause 요청
+    paused --> running: 관제 resume
+
+    running --> stopped: StopAgent()\n또는 정상 종료
+    running --> error: 프로세스 크래시/에러
+
+    stopped --> [*]
+    error --> [*]
+```
+
+## 3. 전략 회의(Strategy Meeting) 플로우
+
+```mermaid
+stateDiagram-v2
+    [*] --> running: 다수 태스크 실행 중
+
+    running --> meeting_requested: 반복 실패(retry≥5)\n또는 문맥 충돌/중복 감지
+    meeting_requested --> meeting_started: POST /strategy/pause
+
+    meeting_started --> all_paused: 관련 태스크 일시정지
+
+    all_paused --> meeting_resolved: 관제 AI 투표/결정
+    meeting_resolved --> decision_applied: POST /strategy/apply
+
+    decision_applied --> cancelled: cancelTaskIds
+    decision_applied --> kept: keepTaskIds (재개 가능)
+    cancelled --> [*]
+    kept --> running: resume
+```
+
+## 4. 재시도(Retry) & 컨텍스트 리셋
+
+```mermaid
+stateDiagram-v2
+    [*] --> running: 태스크 실행 중
+
+    running --> retry_incremented: POST .../retry-increment
+    retry_incremented --> running: retryCount < 5
+
+    retry_incremented --> context_reset: retryCount ≥ 5
+    context_reset --> meeting_requested: strategy.meeting_requested
+    meeting_requested --> running: 회의 후 재분배/재개
+```
+
+## 5. 통합 뷰 (Task + Agent 관계)
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    state "Task" as T {
+        [*] --> running
+        running --> paused
+        paused --> running
+        running --> stopped
+        running --> cancelled
+        running --> done
+    }
+    state "Agent 1..N" as A {
+        [*] --> starting
+        starting --> running
+        running --> stopped
+        running --> error
+    }
+    T --> A: 태스크 1개당 N명 에이전트
+    A --> T: 전원 종료 시 task 상태 반영
+```

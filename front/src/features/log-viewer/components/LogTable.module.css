@@ -1,0 +1,179 @@
+.tableWrap {
+  flex: 1;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.th {
+  position: sticky;
+  top: 0;
+  background: var(--color-surface);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.row {
+  cursor: pointer;
+  transition: background 0.1s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Event type row tinting */
+.start { background: rgba(59, 130, 246, 0.04); }
+.start:hover { background: rgba(59, 130, 246, 0.08); }
+.progress { background: rgba(0, 245, 160, 0.03); }
+.progress:hover { background: rgba(0, 245, 160, 0.06); }
+.complete { background: rgba(16, 185, 129, 0.04); }
+.complete:hover { background: rgba(16, 185, 129, 0.08); }
+.warning { background: rgba(245, 158, 11, 0.04); }
+.warning:hover { background: rgba(245, 158, 11, 0.08); }
+.error { background: rgba(239, 68, 68, 0.05); }
+.error:hover { background: rgba(239, 68, 68, 0.09); }
+.conflict { background: rgba(249, 115, 22, 0.04); }
+.conflict:hover { background: rgba(249, 115, 22, 0.08); }
+.paused { background: rgba(156, 163, 175, 0.04); }
+.paused:hover { background: rgba(156, 163, 175, 0.08); }
+
+.selected {
+  background: rgba(0, 245, 160, 0.08) !important;
+  border-left: 3px solid var(--color-primary);
+}
+
+.td {
+  padding: 10px 14px;
+  color: var(--color-text);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.descCell {
+  white-space: normal;
+  max-width: 320px;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Event type tag */
+.eventTag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.eventTag.start { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
+.eventTag.progress { background: rgba(0, 245, 160, 0.1); color: var(--color-primary); }
+.eventTag.complete { background: rgba(16, 185, 129, 0.15); color: #34D399; }
+.eventTag.warning { background: rgba(245, 158, 11, 0.15); color: #FBBF24; }
+.eventTag.error { background: rgba(239, 68, 68, 0.15); color: #F87171; }
+.eventTag.conflict { background: rgba(249, 115, 22, 0.15); color: #FB923C; }
+.eventTag.paused { background: rgba(156, 163, 175, 0.15); color: #9CA3AF; }
+
+/* Status badges */
+.statusBadge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.badgeActive { background: rgba(0, 245, 160, 0.12); color: var(--color-primary); }
+.badgeCompleted { background: rgba(16, 185, 129, 0.12); color: #34D399; }
+.badgeWarning { background: rgba(245, 158, 11, 0.12); color: #FBBF24; }
+.badgeError { background: rgba(239, 68, 68, 0.12); color: #F87171; }
+.badgePaused { background: rgba(156, 163, 175, 0.12); color: #9CA3AF; }
+
+.empty {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.loadingOverlay {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+.loadingText {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.pageInfo {
+  min-width: 120px;
+}
+.pageControls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pageBtn {
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+.pageBtn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.06);
+}
+.pageBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.pageNum {
+  padding: 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.pageSizeSelect {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
